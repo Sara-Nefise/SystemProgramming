@@ -1,0 +1,43 @@
+BIL 222 HW3: Memory Allocator
+
+Bilinmesi gerekenler
+Dynamic memory allocation
+sbrk()
+Linked lists
+struct, typedef
+Memory alignment
+Heap
+Özet
+Bu ödevde bir tane C programları için memory allocator yapmanız istenmektedir.
+Detay
+void *mymalloc(size_t size) şu şekilde çalışmalıdır.
+Eğer ilk defa çağrılıyorsa sbrk kullanılarak 1024 byte heap alanı genişletilmeli ve bir tane free block oluşturulmalıdır.
+size  16nın katı olacak şekilde yukarı yuvarlama yapılmalı
+İstenilen alanı karşılayacak bir tane free block bulunup (seçilen stratejiye göre best fit, worst fit, yada first fit), bu alan iki bloğa split edilerek, birisi free liste eklenmeli diğerinin (size kadar alanın)  başlangıç adresi return edilmelidir.
+
+void *myfree(void *p) p ile verilen alan free edilerek free liste eklenmelidir. Eğer coalescing(birleştirme) yapılabiliyorsa (bir önceki ve bir sonraki blokla) yapılmalıdır. 
+
+int test(int fitStrategy)
+Fit stratejilerini test etmek için bir tane basit test kodu yazıp, rastgele mymalloc ve myfree yi çağırarak, external fragmentation’ın hangi stratejide daha fazla olduğunu kısaca açıklayınız. 
+
+Bu ödev için verilen mymalloc.h header dosyasını kullanınız. mymalloc.c ve mymalloc.h dosyalarını teslim ediniz
+Derecelendirme
+%60 mymalloc:
++5 sbrk ilk defa çağrılması ve tek bloğun başarılı bir şekilde oluşturulması
+-5 Blok büyüklüğünün 16’nın katı olması
++30 Free bloğun link liste doğru bir şekilde bulunması
++10 First fit
++10 Worst fit
++10 Best fit
++20 Bulunan alanın split edilmesi (split fonksiyonu)
++5 Link listen çıkarılıp return
+%30 myfree
++10 Link liste başarılı bir şekilde eklenmesi
++20 Coalescing
++10 Next blok ile
++10 prevıous blok ile
+%10 test kodu 
+-10 puana kadar indentation, dosya isimleri, ve diğer kodlama standartları
+
+
+
